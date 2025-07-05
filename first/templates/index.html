@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Álgebra Vectorial en Sistemas</title>
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">📘 Álgebra Lineal</div>
+        <ul class="nav-links">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Sobre el curso</a></li>
+            <li><a href="#">Recursos</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+        <a class="btn enroll-top" href="{% url 'menu' %}">Ir al Curso</a>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Vectores en Ingeniería de Sistemas</h1>
+            <p>
+                Descubre cómo el álgebra vectorial se aplica en gráficos 3D, simulación, videojuegos, inteligencia
+                artificial y procesamiento de datos.
+                Este módulo interactivo te guía desde las operaciones básicas en \( \mathbb{R}^2 \) y \( \mathbb{R}^3
+                \), hasta su impacto en el desarrollo de software moderno.
+            </p>
+            <a href="{% url 'menu' %}" class="btn">Comenzar</a>
+        </div>
+    </header>
+
+    <section class="content">
+        <h2>¿Qué aprenderás?</h2>
+        <p>
+            Este curso está orientado a estudiantes de Ingeniería en Informática y Sistemas. Aprenderás a trabajar con
+            vectores, productos escalares, proyecciones,
+            y cómo estos conceptos se integran en áreas como gráficos por computadora, inteligencia artificial, motores
+            de juegos y visualización de datos.
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <h3>📊</h3>
+                <h4>Operaciones en \( \mathbb{R}^2 \) y \( \mathbb{R}^3 \)</h4>
+                <p>
+                    Realiza operaciones vectoriales como suma, resta y producto escalar. Visualiza tus resultados en 2D
+                    y 3D con ejemplos aplicados a la carrera.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🕹️</h3>
+                <h4>Aplicaciones en videojuegos y software</h4>
+                <p>
+                    Aprende cómo los vectores permiten crear movimiento, colisiones y transformaciones en entornos
+                    digitales. Ideal para desarrolladores y entusiastas del 3D.
+                </p>
+            </div>
+        </div>
+
+        <a href="#" class="btn-outline">Ver contenido completo</a>
+    </section>
+</body>
+
+</html>

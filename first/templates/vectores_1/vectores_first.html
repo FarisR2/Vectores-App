@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vectores en R2 y R3</title>
+    <link rel="stylesheet" href="{% static 'css/vectorFirst.css' %}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <header class="barra-navegacion">
+        <div class="logo">📘 Curso de Matemáticas</div>
+        <nav>
+            <a href="#">Curso</a>
+            <a href="#">Acerca de</a>
+            <button class="btn-iniciar">Iniciar sesión</button>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <h1 class="texto-matematico">Vectores en \( \mathbb{R}^2 \) y \( \mathbb{R}^3 \)</h1>
+        <p class="texto-matematico">
+            En esta aplicación interactiva se pueden visualizar dos tipos de gráficos: uno en \( \mathbb{R}^2 \) y otro
+            en \( \mathbb{R}^3 \). <br>
+            El gráfico en \( \mathbb{R}^3 \) permite explorar la representación tridimensional de los vectores, lo que
+            simula una perspectiva espacial. <br>
+            Este tipo de visualización es ampliamente utilizada en áreas como el diseño gráfico, la animación y los
+            videojuegos, donde las coordenadas tridimensionales son fundamentales para crear entornos realistas y
+            dinámicos.
+        </p>
+
+        <div class="grupo-botones">
+            <button class="btn-primario" id="openModalBtn">Graficar en R2</button>
+            <button class="btn-secundario" id="openModal3D">Graficar en R3</button>
+            <button class="btn-simular" id="openSimulacionBtn">Simulación interactiva</button>
+        </div>
+    </main>
+
+    <!-- Modal R2 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Ingrese un vector en \( \mathbb{R}^2 \)</h2>
+            <form id="vectorForm">
+                <label for="x">x:</label>
+                <input type="number" id="x" name="x" step="any" required>
+                <label for="y">y:</label>
+                <input type="number" id="y" name="y" step="any" required>
+                <button type="submit">Graficar</button>
+            </form>
+            <canvas id="vectorChart" width="400" height="400"></canvas>
+        </div>
+    </div>
+
+    <!-- Modal R3 -->
+    <div id="modal3D" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close3D">&times;</span>
+            <h2>Ingrese un vector en \( \mathbb{R}^3 \)</h2>
+            <form id="vectorForm3D">
+                <label for="x3">x:</label>
+                <input type="number" id="x3" required>
+                <label for="y3">y:</label>
+                <input type="number" id="y3" required>
+                <label for="z3">z:</label>
+                <input type="number" id="z3" required>
+                <button type="submit">Graficar</button>
+            </form>
+            <div id="vectorChart3D" style="width: 100%; height: 400px;"></div>
+        </div>
+    </div>
+
+    <!-- Modal Simulación R2 -->
+    <div id="modalSimulacion" class="modal">
+        <div class="modal-content" style="position: relative;">
+            <span class="close" id="closeSimulacion">&times;</span>
+            <h2>Simulación de movimiento con vectores en \( \mathbb{R}^2 \)</h2>
+            <div class="controls" style="margin-bottom: 10px;">
+                <label>Fuerza X:</label>
+                <input type="number" id="inputX" value="0.5" step="0.1">
+                <label>Fuerza Y:</label>
+                <input type="number" id="inputY" value="-0.5" step="0.1">
+                <button id="applyForceBtn">Aplicar fuerza</button>
+            </div>
+            <canvas id="gameCanvas" width="600" height="400" style="background: #222; border-radius: 8px;"></canvas>
+        </div>
+    </div>
+
+    <script src="{% static 'js/vectorModal.js' %}"></script>
+    <script src="{% static 'js/vectorModalR3.js' %}"></script>
+    <script src="{% static 'js/simulacionVector.js' %}"></script>
+
+</body>
+
+</html>

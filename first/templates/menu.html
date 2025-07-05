@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard de Vectores</title>
+    <link rel="stylesheet" href="{% static 'css/styleMenu.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">📘 Math Academy</div>
+        <ul class="nav-links">
+            <li><a href="#">Cursos</a></li>
+            <li><a href="#">Práctica</a></li>
+            <li><a href="#">Recursos</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <h1>Aplicación en la carrera </h1>
+
+        <div class="dashboard">
+            <section class="section">
+                <h2>Math 1</h2>
+                <ul>
+                    <li><a href="{% url 'vectores' %}">Vectores R2 y R3</a></li>
+                    <li><a href="{% url 'operation' %}">Operaciones con Vectores</a></li>
+                    <li><a href="#">Producto Punto</a></li>
+                    <li><a href="#">Producto Cruz</a></li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Math 2</h2>
+                <ul>
+                    <li><a href="#">Espacios Vectoriales</a></li>
+                    <li><a href="#">Transformaciones Lineales</a></li>
+                    <li><a href="#">Autovalores y Autovectores</a></li>
+                    <li><a href="#">Ortogonalidad</a></li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Operación con Vectores</title>
+    <link rel="stylesheet" href="{% static 'css/operation.css' %}" />
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <header class="barra-navegacion">
+        <div class="logo">📘 Curso de Matemáticas</div>
+        <nav>
+            <a href="#">Curso</a>
+            <a href="#">Acerca de</a>
+            <button class="btn-iniciar">Iniciar sesión</button>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <h1>Operación de Vectores</h1>
+        <p class="texto-matematico">
+            Ingrese dos vectores en \( \mathbb{R}^2 \) y elija una operación para calcular el resultado componente a componente.
+        </p>
+
+        <div class="grupo-botones">
+            <button class="btn-primario" id="openModalBtn">Operacion en R2</button>
+            <button class="btn-secundario" id="openModal3D">Operacion en R3</button>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="texto-matematico">Operación en \( \mathbb{R}^2 \)</h2>
+
+            <form id="operationForm">
+                <label for="operation">Elegir operación:</label>
+                <select id="operation" name="operation" required>
+                    <option value="suma">Suma</option>
+                    <option value="resta">Resta</option>
+                    <option value="multiplicacion">Producto escalar</option>
+                </select>
+
+                <div class="input-group">
+                    <label for="x1">x₁:</label>
+                    <input type="number" id="x1" name="x1" step="any" required>
+
+                    <label for="y1">y₁:</label>
+                    <input type="number" id="y1" name="y1" step="any" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="x2">x₂:</label>
+                    <input type="number" id="x2" name="x2" step="any" required>
+
+                    <label for="y2">y₂:</label>
+                    <input type="number" id="y2" name="y2" step="any" required>
+                </div>
+
+                <button id="finish" type="submit" class="btn-primario">Calcular</button>
+            </form>
+
+            <div id="resultado" class="texto-matematico" style="margin-top: 1rem;"></div>
+        </div>
+    </div>
+
+    <div id="modal3D" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close3D">&times;</span>
+            <h2 class="texto-matematico">Operación en \( \mathbb{R}^3 \)</h2>
+
+            <form id="operationForm3D">
+                <label for="operation">Elegir operación:</label>
+                <select id="operation_3d" name="operation" required>
+                    <option value="suma">Suma</option>
+                    <option value="resta">Resta</option>
+                    <option value="multiplicacion">Producto escalar</option>
+                </select>
+
+                <div class="input-group">
+                    <label for="x1">x₁:</label>
+                    <input type="number" id="x1_3d" name="x1" step="any" required>
+
+                    <label for="y1">y₁:</label>
+                    <input type="number" id="y1_3d" name="y1" step="any" required>
+
+                    <label for="z1">z₁:</label>
+                    <input type="number" id="z1_3d" name="z1" step="any" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="x2">x₂:</label>
+                    <input type="number" id="x2_3d" name="x2" step="any" required>
+
+                    <label for="y2">y₂:</label>
+                    <input type="number" id="y2_3d" name="y2" step="any" required>
+
+                    <label for="z2">z₂:</label>
+                    <input type="number" id="z2_3d" name="z2" step="any" required>
+                </div>
+
+                <button id="finish" type="submit" class="btn-primario">Calcular</button>
+            </form>
+
+            <div id="resultado2" class="texto-matematico" style="margin-top: 1rem;"></div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/operationModal.js' %}"></script>
+    <script src="{% static 'js/operationModalR3.js' %}"></script>
+</body>
+
+</html>

@@ -12,3 +12,4 @@ build/
 staticfiles/
 media/
 node_modules/
+venv/

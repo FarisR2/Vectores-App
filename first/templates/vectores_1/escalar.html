@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Producto Escalar en Sistemas</title>
+    <link rel="stylesheet" href="{% static 'css/escalar.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="contenedor">
+        <h1>Producto Escalar en la Carrera de Sistemas</h1>
+        <p>El producto escalar se aplica en áreas clave de la ingeniería en sistemas:</p>
+        <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
+            <li>🎧 Comparación de preferencias entre usuarios, útil en sistemas de recomendación.</li>
+            <li>🎮 Detección del campo de visión en videojuegos y simulaciones 3D.</li>
+        </ul>
+        <p>Explora ambos escenarios con los siguientes simuladores interactivos:</p>
+        <div class="botones">
+            <button id="abrirGustos">🎧 Comparación de Gustos</button>
+            <button id="abrirVision">🎮 Campo de Visión</button>
+        </div>
+    </div>
+
+    <div class="modal" id="modalGustos">
+        <div class="modal-content">
+            <span class="close" onclick="modalGustos.style.display='none'">&times;</span>
+            <h2>Simulador de Comparación de Gustos</h2>
+            <p>Ingrese tres valores por cada usuario (A y B):</p>
+            <form id="formGustos">
+                <div class="vector-group">
+                    <div class="vector-column">
+                        <label>Usuario A</label>
+                        <input type="number" id="a1" placeholder="A1" required />
+                        <input type="number" id="a2" placeholder="A2" required />
+                        <input type="number" id="a3" placeholder="A3" required />
+                    </div>
+                    <div class="vector-column">
+                        <label>Usuario B</label>
+                        <input type="number" id="b1" placeholder="B1" required />
+                        <input type="number" id="b2" placeholder="B2" required />
+                        <input type="number" id="b3" placeholder="B3" required />
+                    </div>
+                </div>
+                <button type="submit">Comparar</button>
+            </form>
+            <div id="resultadoGustos" style="margin-top: 1rem;"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalVision">
+        <div class="modal-content">
+            <span class="close" onclick="modalVision.style.display='none'">&times;</span>
+            <h2>Simulador de Campo de Visión</h2>
+            <p>Haz clic para mover al enemigo y ver si está dentro del campo de visión del jugador.</p>
+            <canvas id="gameCanvas" width="500" height="400"></canvas>
+            <div id="info" style="margin-top: 1rem;"></div>
+        </div>
+    </div>
+    <script src="{% static 'js/vectorEscalar_1.js' %}"></script>
+    <script src="{% static 'js/vectorEscalar_2.js' %}"></script>
+
+</body>
+
+</html>

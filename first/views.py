@@ -19,3 +19,9 @@ def vectores(request):
 
 def operation(request):
     return render(request, 'vectores_1/operation.html')
+
+def escalar(request):
+    return render(request, 'vectores_1/escalar.html')
+
+def producto(request):
+    return render(request, 'vectores_1/productoCruz.html')

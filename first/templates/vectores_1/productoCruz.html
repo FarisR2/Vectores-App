@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Producto Cruzado en Sistemas</title>
+    <link rel="stylesheet" href="{% static 'css/producto.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .filter {
+            display: grid;
+            grid-template-columns: repeat(3, 30px);
+            gap: 3px;
+            margin-top: 10px;
+        }
+
+        .filter input {
+            width: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedor">
+        <h1>Producto Cruzado en la Carrera de Sistemas</h1>
+        <p>El producto cruzado se utiliza para obtener un vector perpendicular al plano definido por dos vectores.
+            Esta operación es clave en computación gráfica para detectar orientaciones, rotaciones, colisiones y
+            simulaciones físicas tridimensionales.</p>
+
+        <p>Explora esta operación con los siguientes simuladores interactivos:</p>
+
+        <div class="botones">
+            <button id="abrirCruzado">✖️ Simulador de Producto Cruzado</button>
+            <button id="abrirFiltro">🖼️ Filtros en Imágenes</button>
+        </div>
+    </div>
+
+    <!-- Modal Producto Cruzado -->
+    <div class="modal" id="modalCruzado">
+        <div class="modal-content">
+            <span class="close" onclick="modalCruzado.style.display='none'">&times;</span>
+            <h2>Simulador de Producto Cruzado</h2>
+            <p>Haz clic sobre el área para mover el punto C y observar el resultado del producto cruzado entre los
+                vectores AB y AC.</p>
+            <canvas id="canvas" width="500" height="400"></canvas>
+            <div id="info" style="margin-top: 1rem;"></div>
+        </div>
+    </div>
+
+    <!-- Modal Filtro de Imágenes -->
+    <div class="modal" id="modalFiltro">
+        <div class="modal-content">
+            <span class="close" onclick="modalFiltro.style.display='none'">&times;</span>
+            <h2>Simulador de Filtros en Imágenes</h2>
+            <canvas id="canvasFiltro" width="200" height="200"></canvas>
+            <h3>Matriz del filtro (3x3):</h3>
+            <div id="filterInputs" class="filter"></div>
+            <button id="btnAplicarFiltro">Aplicar Filtro</button>
+        </div>
+    </div>
+
+    <script src="{% static 'js/vectorCruz.js' %}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const modalCruzado = document.getElementById("modalCruzado");
+            const modalFiltro = document.getElementById("modalFiltro");
+
+            document.getElementById("abrirCruzado").onclick = () => modalCruzado.style.display = 'block';
+            document.getElementById("abrirFiltro").onclick = () => modalFiltro.style.display = 'block';
+
+            // ----- Filtro Imagen -----
+            const canvas = document.getElementById('canvasFiltro');
+            const ctx = canvas.getContext('2d');
+            const filterDiv = document.getElementById('filterInputs');
+            const btnAplicar = document.getElementById('btnAplicarFiltro');
+
+            const imageMatrix = [
+                [100, 100, 100, 100, 100],
+                [100, 150, 150, 150, 100],
+                [100, 150, 255, 150, 100],
+                [100, 150, 150, 150, 100],
+                [100, 100, 100, 100, 100],
+            ];
+
+            const defaultFilter = [
+                [-1, 0, 1],
+                [-1, 0, 1],
+                [-1, 0, 1],
+            ];
+
+            function crearInputsFiltro() {
+                filterDiv.innerHTML = "";
+                for (let i = 0; i < 9; i++) {
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.value = defaultFilter[Math.floor(i / 3)][i % 3];
+                    input.step = "any";
+                    filterDiv.appendChild(input);
+                }
+            }
+
+            function getFiltro() {
+                const inputs = filterDiv.querySelectorAll('input');
+                const filtro = [];
+                for (let i = 0; i < 3; i++) {
+                    filtro[i] = [];
+                    for (let j = 0; j < 3; j++) {
+                        filtro[i][j] = parseFloat(inputs[i * 3 + j].value);
+                    }
+                }
+                return filtro;
+            }
+
+            function drawImage(matrix) {
+                const cellSize = 40;
+                for (let i = 0; i < matrix.length; i++) {
+                    for (let j = 0; j < matrix[0].length; j++) {
+                        const gray = matrix[i][j];
+                        ctx.fillStyle = `rgb(${gray},${gray},${gray})`;
+                        ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                    }
+                }
+            }
+
+            function aplicarFiltro() {
+                const filtro = getFiltro();
+                const resultado = [];
+
+                for (let i = 1; i < imageMatrix.length - 1; i++) {
+                    const fila = [];
+                    for (let j = 1; j < imageMatrix[0].length - 1; j++) {
+                        let suma = 0;
+                        for (let fi = -1; fi <= 1; fi++) {
+                            for (let fj = -1; fj <= 1; fj++) {
+                                const valor = imageMatrix[i + fi][j + fj];
+                                const coef = filtro[fi + 1][fj + 1];
+                                suma += valor * coef;
+                            }
+                        }
+                        fila.push(Math.min(255, Math.max(0, Math.round(suma))));
+                    }
+                    resultado.push(fila);
+                }
+
+                const finalImage = Array(5).fill().map(() => Array(5).fill(0));
+                for (let i = 0; i < resultado.length; i++) {
+                    for (let j = 0; j < resultado[0].length; j++) {
+                        finalImage[i + 1][j + 1] = resultado[i][j];
+                    }
+                }
+
+                drawImage(finalImage);
+            }
+
+            btnAplicar.addEventListener('click', aplicarFiltro);
+
+            crearInputsFiltro();
+            drawImage(imageMatrix);
+        });
+    </script>
+</body>
+
+</html>
